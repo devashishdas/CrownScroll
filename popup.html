@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CrownScroll</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: #fffdfa; color: #2e2831; }
+    body { width: 286px; margin: 0; padding: 19px; }
+    header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .mark { background: #eee3f6; color: #684899; font-weight: 900; font-size: 18px;
+      width: 37px; height: 37px; display: grid; place-items: center; border-radius: 12px; }
+    h1 { font-size: 16px; margin: 0; line-height: 1.3; }
+    .sub { font-size: 12px; margin: 3px 0 0; color: #796f80; }
+    .setting { display: flex; gap: 10px; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-top: 1px solid #e7e0e7; font-size: 13px; font-weight: 650; }
+    select { background: #fff; border: 1px solid #d6ccd8; border-radius: 9px; font: inherit;
+      padding: 7px; color: inherit; max-width: 155px; }
+    input[type="checkbox"] { width: 18px; height: 18px; accent-color: #7047a5; cursor: pointer; }
+    .help { border-top: 1px solid #e7e0e7; padding-top: 12px; color: #716875;
+      font-size: 11px; line-height: 1.45; }
+    .msg { min-height: 17px; font-size: 11px; color: #684899; }
+    #connection { padding: 11px 12px; background: #f3f0f6; border: 1px solid #e6dcea;
+      border-radius: 10px; font-size: 12px; line-height: 1.5; margin: 12px 0 9px; }
+    #connection[data-kind='good'] { background: #eff8f0; border-color: #bcdcc5; color: #225b31; }
+    #connection[data-kind='warning'] { background: #fff8ec; border-color: #f0d6a3; color: #78521c; }
+    #connection[data-kind='error'] { background: #fff0ef; border-color: #e9b1b0; color: #923430; }
+    #repair { width: 100%; padding: 10px 12px; border: none; background: #6944a1;
+      color: white; border-radius: 9px; font: inherit; font-weight: 650; cursor: pointer; }
+    #repair:disabled { opacity: .55; cursor: wait; }
+
+    kbd { display: inline-block; background: #f0ebf2; border-radius: 4px; padding: 0 4px; }
+  </style>
+</head>
+<body>
+  <header><div class="mark" aria-hidden="true">↕</div><div>
+    <h1>CrownScroll</h1><p class="sub">Conversation navigation</p>
+  </div></header>
+  <label class="setting">Extension enabled <input type="checkbox" id="enabled" checked></label>
+  <label class="setting">Theme <select id="theme">
+    <option value="auto">Match system</option><option value="light">Light</option><option value="dark">Dark</option>
+  </select></label>
+  <label class="setting">Navigation style <select id="mode">
+    <option value="classic">Classic buttons</option><option value="thumbwheel">Knurled wheel</option>
+  </select></label>
+  <label class="setting">Wheel sensitivity <select id="sensitivity">
+    <option value="gentle">Gentle · 0.5×</option><option value="normal">Normal · 1×</option>
+    <option value="fast">Fast · 2×</option>
+  </select></label>
+  <label class="setting">Floating position <select id="position">
+    <option value="right-middle">Right · middle</option>
+    <option value="right-lower">Right · lower</option>
+    <option value="left-middle">Left · middle</option>
+  </select></label>
+  <div id="connection" role="status" aria-live="polite">Checking current tab…</div>
+  <button id="repair" type="button">Show toolbar on this tab</button>
+  <p class="help">Drag the knurled wheel vertically or roll the mouse wheel over it. Arrow keys work when the wheel is focused.<br>
+  Wrong scroll area? Press <strong>◎</strong>, then click a conversation message.<br>
+  <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>↓</kbd> jumps to the latest message.<br>
+  If missing, click <strong>Show toolbar</strong> above and close this popup.</p>
+  <p class="msg" id="message" role="status"></p>
+  <script src="popup.js"></script>
+</body>
+</html>
